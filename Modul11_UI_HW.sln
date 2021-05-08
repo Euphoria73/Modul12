@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30523.141
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Modul11_UI_HW", "Modul11_UI_HW.csproj", "{32A0C76F-A38D-4542-9FEC-3C3BB949BD34}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interfaces", "..\Interfaces\Interfaces.csproj", "{E8A62E26-6115-4B0A-B225-B38619500B97}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{32A0C76F-A38D-4542-9FEC-3C3BB949BD34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32A0C76F-A38D-4542-9FEC-3C3BB949BD34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32A0C76F-A38D-4542-9FEC-3C3BB949BD34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32A0C76F-A38D-4542-9FEC-3C3BB949BD34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8A62E26-6115-4B0A-B225-B38619500B97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8A62E26-6115-4B0A-B225-B38619500B97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8A62E26-6115-4B0A-B225-B38619500B97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8A62E26-6115-4B0A-B225-B38619500B97}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B0D38418-A6D9-4B74-AE35-AA477F3CEDB1}
+	EndGlobalSection
+EndGlobal
