@@ -154,20 +154,7 @@ namespace Modul11_UI_HW.ViewModel
             }
         }
 
-        #endregion
-
-        #region Команда удаления сотрудника из департамента
-
-        public ICommand DeleteEmployeeCommand { get; } 
-
-        private bool CanDeleteEmployeeCommandExecute(object path) => true;
-
-        public void OnDeleteEmployeeCommandExecuted(object path)
-        {            
-            structure.RefreshSalary(_myOrganization);        
-        }
-
-        #endregion
+        #endregion        
 
         #region Команда добавления нового департамента в выбранный департамент
         public ICommand AddDepartmentCommand { get; } 
@@ -230,11 +217,9 @@ namespace Modul11_UI_HW.ViewModel
             CreateCommand = new RelayCommand(OnCreateCommandExecuted, CanCreateCommandExecute);
             OpenCommand = new RelayCommand(OnOpenCommandExecuted, CanOpenCommandExecute);
             SaveCommand = new RelayCommand(OnSaveCommandExecutedAsync, CanSaveCommandExecute);
-            AddEmployeeCommand = new RelayCommand(OnAddEmployeeCommandExecuted, CanAddEmployeeCommandExecute);
-            DeleteEmployeeCommand = new RelayCommand(OnDeleteEmployeeCommandExecuted, CanDeleteEmployeeCommandExecute);
+            AddEmployeeCommand = new RelayCommand(OnAddEmployeeCommandExecuted, CanAddEmployeeCommandExecute);           
             AddDepartmentCommand = new RelayCommand(OnAddDepartmentCommandExecuted, CanAddDepartmentCommandExecute);
             DeleteDepartmentCommand = new RelayCommand(OnDeleteDepartmentCommandExecuted, CanDeleteDepartmentCommandExecute);
-
         }
 
 
