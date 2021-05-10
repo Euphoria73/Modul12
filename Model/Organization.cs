@@ -5,21 +5,21 @@ using System.Collections.ObjectModel;
 
 namespace Modul11_UI_HW.Model
 {
-    class Structure
+    class Organization
     {
-        private static Structure instance;
+        private static Organization instance;
 
-        private Structure()
+        private Organization()
         { }
         /// <summary>
         /// Синглтон структуры организации
         /// </summary>
         /// <returns></returns>
-        public static Structure GetInstance()
+        public static Organization GetInstance()
         {
             if (instance == null)
             {
-                instance = new Structure();
+                instance = new Organization();
             }
             return instance;
         }
@@ -27,7 +27,7 @@ namespace Modul11_UI_HW.Model
         /// Заполнение новой организации псевдослучайными данными
         /// </summary>
         /// <param name="deps"></param>
-        public void FillSomeStructure(ObservableCollection<Department> deps) 
+        public void Populate(ObservableCollection<Department> deps) 
         {
             if (deps.Count == 0)
             {
@@ -36,7 +36,7 @@ namespace Modul11_UI_HW.Model
                     "Top Secret", 0
                 ));
             }
-            PopulateStructure(deps[0].Departments, "Department ", 0);
+            PopulateOrganization(deps[0].Departments, "Department ", 0);
            
             foreach (var item in deps)
             {                
@@ -50,7 +50,7 @@ namespace Modul11_UI_HW.Model
         /// <param name="deps"></param>
         /// <param name="nameDepartment"></param>
         /// <param name="countDivisions"></param>
-        private void PopulateStructure(ObservableCollection<Department> deps, string nameDepartment, int countDivisions)
+        private void PopulateOrganization(ObservableCollection<Department> deps, string nameDepartment, int countDivisions)
         {            
             if (countDivisions == 0)
             {
@@ -66,8 +66,8 @@ namespace Modul11_UI_HW.Model
                     {
                         item.ManagerDepartment.Salary += item.ManagerDepartment.ManagerGetSalary(item);
                     }
-                    
-                    PopulateStructure(deps[i].Departments, deps[i].NameDepartment + ".", countDivisions - 1);
+
+                    PopulateOrganization(deps[i].Departments, deps[i].NameDepartment + ".", countDivisions - 1);
                 }
             }
         }

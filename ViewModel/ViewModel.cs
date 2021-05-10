@@ -37,7 +37,7 @@ namespace Modul11_UI_HW.ViewModel
         }
         private static ObservableCollection<Department> _myOrganization = new ObservableCollection<Department>();
 
-        private readonly Structure structure = Structure.GetInstance(); //использую синглтон структуры, т.к. в один момент времени мы можем работать только с одной организацией
+        private readonly Organization structure = Organization.GetInstance(); //использую синглтон структуры, т.к. в один момент времени мы можем работать только с одной организацией
        
         /// <summary>
         /// Коллекция организации
@@ -63,7 +63,7 @@ namespace Modul11_UI_HW.ViewModel
         //Создание структуры компании 
         public void OnCreateCommandExecuted(object file)
         {            
-            structure.FillSomeStructure(_myOrganization);
+            structure.Populate(_myOrganization);
         }
 
         public ICommand OpenCommand { get; } //Команда для открытия организации из файла
