@@ -153,7 +153,6 @@ namespace Modul11_UI_HW.ViewModel
                 MessageBox.Show($"Ошибка: {e.Message} => {e.GetType()}, передайте информацию в отдел технической поддержки для исправления");
             }
         }
-
         #endregion     
 
         #region Команда добавления нового департамента в выбранный департамент
@@ -217,9 +216,10 @@ namespace Modul11_UI_HW.ViewModel
             CreateCommand = new RelayCommand(OnCreateCommandExecuted, CanCreateCommandExecute);
             OpenCommand = new RelayCommand(OnOpenCommandExecuted, CanOpenCommandExecute);
             SaveCommand = new RelayCommand(OnSaveCommandExecutedAsync, CanSaveCommandExecute);
-            AddEmployeeCommand = new RelayCommand(OnAddEmployeeCommandExecuted, CanAddEmployeeCommandExecute);           
+            AddEmployeeCommand = new RelayCommand(OnAddEmployeeCommandExecuted, CanAddEmployeeCommandExecute);          
             AddDepartmentCommand = new RelayCommand(OnAddDepartmentCommandExecuted, CanAddDepartmentCommandExecute);
             DeleteDepartmentCommand = new RelayCommand(OnDeleteDepartmentCommandExecuted, CanDeleteDepartmentCommandExecute);
+
         }
 
 
