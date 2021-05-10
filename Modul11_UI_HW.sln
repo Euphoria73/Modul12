@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Modul11_UI_HW", "Modul11_UI
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interfaces", "..\Interfaces\Interfaces.csproj", "{E8A62E26-6115-4B0A-B225-B38619500B97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modul11_UI_HW.Tests", "..\Modul11_UI_HW.Tests\Modul11_UI_HW.Tests.csproj", "{A52131B9-8644-4347-8277-77A8E2D1CEF1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modul11_UI_HW.Tests", "..\Modul11_UI_HW.Tests\Modul11_UI_HW.Tests.csproj", "{83B95A0C-ED5B-40E6-AE7B-30DF85377B20}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{E8A62E26-6115-4B0A-B225-B38619500B97}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E8A62E26-6115-4B0A-B225-B38619500B97}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E8A62E26-6115-4B0A-B225-B38619500B97}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A52131B9-8644-4347-8277-77A8E2D1CEF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A52131B9-8644-4347-8277-77A8E2D1CEF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A52131B9-8644-4347-8277-77A8E2D1CEF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A52131B9-8644-4347-8277-77A8E2D1CEF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83B95A0C-ED5B-40E6-AE7B-30DF85377B20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83B95A0C-ED5B-40E6-AE7B-30DF85377B20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83B95A0C-ED5B-40E6-AE7B-30DF85377B20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83B95A0C-ED5B-40E6-AE7B-30DF85377B20}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

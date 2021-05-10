@@ -112,7 +112,7 @@
                         <DataGridTemplateColumn Header="Действие" IsReadOnly="True">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Content="Удалить" Command="Delete"/>                                  
+                                    <Button Content="Удалить" Command="Delete"/>                                
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>

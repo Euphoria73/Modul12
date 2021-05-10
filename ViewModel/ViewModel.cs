@@ -154,7 +154,7 @@ namespace Modul11_UI_HW.ViewModel
             }
         }
 
-        #endregion        
+        #endregion     
 
         #region Команда добавления нового департамента в выбранный департамент
         public ICommand AddDepartmentCommand { get; } 

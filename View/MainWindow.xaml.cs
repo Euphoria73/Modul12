@@ -25,8 +25,6 @@ namespace Modul11_UI_HW
         public MainWindow()
         {
             InitializeComponent();              
-        }
-
-       
+        }      
     }
 }
