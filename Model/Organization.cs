@@ -1,7 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Collections.ObjectModel;
+using Microsoft.Win32;
+using Newtonsoft.Json;
+using System.IO;
+
 
 namespace Modul11_UI_HW.Model
 {
@@ -33,7 +35,7 @@ namespace Modul11_UI_HW.Model
             {
                 deps.Add(new Department
                 (
-                    "Top Secret", 0
+                    "Default organization", 0
                 ));
             }
             PopulateOrganization(deps[0].Departments, "Department ", 0);
@@ -78,6 +80,56 @@ namespace Modul11_UI_HW.Model
             {
                 item.ManagerDepartment.ManagerGetSalary(item);
             }
+        }
+
+        public ObservableCollection<Department> OpenFromJSONFile()
+        {
+            var dlg = new OpenFileDialog
+            {
+                Title = "Открыть файл",
+                Filter = "Файл json (*.json)|*.json",
+                InitialDirectory = Environment.CurrentDirectory,
+                RestoreDirectory = true
+            };
+            if (dlg.ShowDialog() == false) return null;
+
+            var file = dlg.FileName;
+
+            using StreamReader reader = File.OpenText(file);
+            var fileText = reader.ReadToEnd();
+         
+            return JsonConvert.DeserializeObject<ObservableCollection<Department>>(fileText);
+        }
+
+        public string SerializeToJSON(ObservableCollection<Department> organization)
+        {
+           string text = JsonConvert.SerializeObject(organization, Formatting.Indented,
+                             new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects });
+            return text;
+        }
+
+        public async void SaveToJSONFile(object path, ObservableCollection<Department> organization)
+        {
+            string f_text = SerializeToJSON(organization);
+
+            var fileName = path as string;
+
+            if (fileName == null)
+            {
+                var dialog = new SaveFileDialog
+                {
+                    Title = "Сохранение файла",
+                    Filter = "Файл json (*.json)|*.json",
+                    InitialDirectory = Environment.CurrentDirectory,
+                    RestoreDirectory = true
+                };
+
+                if (dialog.ShowDialog() != true) return;
+                fileName = dialog.FileName;
+            }
+
+            using var writer = new StreamWriter(new FileStream(fileName, FileMode.Create, FileAccess.Write));
+            await writer.WriteAsync(f_text).ConfigureAwait(false);
         }
     }
 }

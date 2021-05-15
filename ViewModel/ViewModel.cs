@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Collections.ObjectModel;
 using Modul11_UI_HW.Model;
 using System.Windows.Input;
 using Modul11_UI_HW.Commands;
 using Microsoft.Win32;
 using System.IO;
-using Newtonsoft.Json;
 using System.Windows;
 
 namespace Modul11_UI_HW.ViewModel
@@ -38,7 +35,7 @@ namespace Modul11_UI_HW.ViewModel
         private static ObservableCollection<Department> _myOrganization = new ObservableCollection<Department>();
 
         private readonly Organization structure = Organization.GetInstance(); //использую синглтон структуры, т.к. в один момент времени мы можем работать только с одной организацией
-       
+
         /// <summary>
         /// Коллекция организации
         /// </summary>
@@ -62,10 +59,12 @@ namespace Modul11_UI_HW.ViewModel
 
         //Создание структуры компании 
         public void OnCreateCommandExecuted(object file)
-        {            
+        {
             structure.Populate(_myOrganization);
         }
+        #endregion
 
+        #region Команда открытия базы данных организации в формате JSON
         public ICommand OpenCommand { get; } //Команда для открытия организации из файла
 
         private bool CanOpenCommandExecute(object path) => true;
@@ -73,59 +72,32 @@ namespace Modul11_UI_HW.ViewModel
         //для открытия записи организации в формате JSON
         public void OnOpenCommandExecuted(object path)
         {
-            var dlg = new OpenFileDialog
+            try
             {
-                Title = "Открыть файл",
-                Filter = "Файл json (*.json)|*.json",
-                InitialDirectory = Environment.CurrentDirectory,
-                RestoreDirectory = true
-            };
-            if (dlg.ShowDialog() != true) return;
-
-            var file = dlg.FileName;
-
-            using StreamReader reader = File.OpenText(file);
-            var fileText = reader.ReadToEnd();
-            GetOrganization = JsonConvert.DeserializeObject<ObservableCollection<Department>>(fileText);
+                GetOrganization = structure.OpenFromJSONFile();
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("Обратитесь в службу поддержки");
+            }
         }
 
         #endregion
 
         #region Команда сохранения организации в файл
-        public ICommand SaveCommand { get; } 
+        public ICommand SaveCommand { get; }
 
         private bool CanSaveCommandExecute(object path)
         {
-            string f_text = JsonConvert.SerializeObject(GetOrganization, Formatting.Indented,
-                            new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects });
+            string f_text = structure.SerializeToJSON(GetOrganization);
             if (f_text == null || f_text == "[]") return false; //проверяем, что структура не пустая
             return true;
         }
 
         //Сохранение организации в формате JSON
-        public async void OnSaveCommandExecutedAsync(object path)
+        public void OnSaveCommandExecutedAsync(object path)
         {
-            string f_text = JsonConvert.SerializeObject(GetOrganization, Formatting.Indented,
-                             new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects });
-
-            var fileName = path as string;
-
-            if (fileName == null)
-            {
-                var dialog = new SaveFileDialog
-                {
-                    Title = "Сохранение файла",
-                    Filter = "Файл json (*.json)|*.json",
-                    InitialDirectory = Environment.CurrentDirectory,
-                    RestoreDirectory = true
-                };
-
-                if (dialog.ShowDialog() != true) return;
-                fileName = dialog.FileName;
-            }
-
-            using var writer = new StreamWriter(new FileStream(fileName, FileMode.Create, FileAccess.Write));
-            await writer.WriteAsync(f_text).ConfigureAwait(false);
+            structure.SaveToJSONFile(path, GetOrganization);
         }
 
         #endregion
@@ -156,7 +128,7 @@ namespace Modul11_UI_HW.ViewModel
         #endregion     
 
         #region Команда добавления нового департамента в выбранный департамент
-        public ICommand AddDepartmentCommand { get; } 
+        public ICommand AddDepartmentCommand { get; }
 
         private bool CanAddDepartmentCommandExecute(object path) => path is Department;
 
@@ -174,7 +146,7 @@ namespace Modul11_UI_HW.ViewModel
                     int lastNumberDepartment = selectedItem.Departments.Count + 1;
                     selectedItem.AddDepartment(new Department($"{selectedItem.NameDepartment + "." + lastNumberDepartment}", 3));
                 }
-                structure.RefreshSalary(_myOrganization);               
+                structure.RefreshSalary(_myOrganization);
             }
             catch (NullReferenceException)
             {
@@ -199,9 +171,9 @@ namespace Modul11_UI_HW.ViewModel
             if (selectedItem.ParentDepartment == null)
             {
                 return;
-            }            
+            }
             selectedItem.ParentDepartment.Departments.Remove(selectedItem); //использую встроенный метод удаления департамента
-            structure.RefreshSalary(_myOrganization);          
+            structure.RefreshSalary(_myOrganization);
         }
 
         #endregion
@@ -216,7 +188,7 @@ namespace Modul11_UI_HW.ViewModel
             CreateCommand = new RelayCommand(OnCreateCommandExecuted, CanCreateCommandExecute);
             OpenCommand = new RelayCommand(OnOpenCommandExecuted, CanOpenCommandExecute);
             SaveCommand = new RelayCommand(OnSaveCommandExecutedAsync, CanSaveCommandExecute);
-            AddEmployeeCommand = new RelayCommand(OnAddEmployeeCommandExecuted, CanAddEmployeeCommandExecute);          
+            AddEmployeeCommand = new RelayCommand(OnAddEmployeeCommandExecuted, CanAddEmployeeCommandExecute);
             AddDepartmentCommand = new RelayCommand(OnAddDepartmentCommandExecuted, CanAddDepartmentCommandExecute);
             DeleteDepartmentCommand = new RelayCommand(OnDeleteDepartmentCommandExecuted, CanDeleteDepartmentCommandExecute);
         }
