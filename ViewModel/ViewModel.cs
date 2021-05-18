@@ -35,7 +35,8 @@ namespace Modul11_UI_HW.ViewModel
         private static ObservableCollection<Department> _myOrganization = new ObservableCollection<Department>();
 
         private readonly Organization structure = Organization.GetInstance(); //использую синглтон структуры, т.к. в один момент времени мы можем работать только с одной организацией
-
+        
+        private readonly OrganizationSource organizationSource = OrganizationSource.GetInstance();
         /// <summary>
         /// Коллекция организации
         /// </summary>
@@ -74,7 +75,7 @@ namespace Modul11_UI_HW.ViewModel
         {
             try
             {
-                GetOrganization = structure.OpenFromJSONFile();
+                GetOrganization = organizationSource.OpenFromJSONFile();
             }
             catch (NullReferenceException)
             {
@@ -89,7 +90,7 @@ namespace Modul11_UI_HW.ViewModel
 
         private bool CanSaveCommandExecute(object path)
         {
-            string f_text = structure.SerializeToJSON(GetOrganization);
+            string f_text = organizationSource.SerializeToJson(GetOrganization);
             if (f_text == null || f_text == "[]") return false; //проверяем, что структура не пустая
             return true;
         }
@@ -97,7 +98,7 @@ namespace Modul11_UI_HW.ViewModel
         //Сохранение организации в формате JSON
         public void OnSaveCommandExecutedAsync(object path)
         {
-            structure.SaveToJSONFile(path, GetOrganization);
+            organizationSource.SaveToJsonFile(path, GetOrganization);
         }
 
         #endregion

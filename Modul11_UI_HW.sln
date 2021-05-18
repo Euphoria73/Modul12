@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.30523.141
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Modul11_UI_HW", "Modul11_UI_HW.csproj", "{32A0C76F-A38D-4542-9FEC-3C3BB949BD34}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E8A62E26-6115-4B0A-B225-B38619500B97} = {E8A62E26-6115-4B0A-B225-B38619500B97}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interfaces", "..\Interfaces\Interfaces.csproj", "{E8A62E26-6115-4B0A-B225-B38619500B97}"
 EndProject

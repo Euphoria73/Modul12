@@ -6,7 +6,7 @@ using System.IO;
 
 
 namespace Modul11_UI_HW.Model
-{
+{ 
     class Organization
     {
         private static Organization instance;
@@ -74,6 +74,10 @@ namespace Modul11_UI_HW.Model
             }
         }
 
+        /// <summary>
+        /// Метод обновления зарплаты руководства
+        /// </summary>
+        /// <param name="organization"></param>
         public void RefreshSalary(ObservableCollection<Department> organization)
         {
             foreach (var item in organization) //пересчитываем зарплаты руководства
@@ -82,54 +86,6 @@ namespace Modul11_UI_HW.Model
             }
         }
 
-        public ObservableCollection<Department> OpenFromJSONFile()
-        {
-            var dlg = new OpenFileDialog
-            {
-                Title = "Открыть файл",
-                Filter = "Файл json (*.json)|*.json",
-                InitialDirectory = Environment.CurrentDirectory,
-                RestoreDirectory = true
-            };
-            if (dlg.ShowDialog() == false) return null;
-
-            var file = dlg.FileName;
-
-            using StreamReader reader = File.OpenText(file);
-            var fileText = reader.ReadToEnd();
-         
-            return JsonConvert.DeserializeObject<ObservableCollection<Department>>(fileText);
-        }
-
-        public string SerializeToJSON(ObservableCollection<Department> organization)
-        {
-           string text = JsonConvert.SerializeObject(organization, Formatting.Indented,
-                             new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects });
-            return text;
-        }
-
-        public async void SaveToJSONFile(object path, ObservableCollection<Department> organization)
-        {
-            string f_text = SerializeToJSON(organization);
-
-            var fileName = path as string;
-
-            if (fileName == null)
-            {
-                var dialog = new SaveFileDialog
-                {
-                    Title = "Сохранение файла",
-                    Filter = "Файл json (*.json)|*.json",
-                    InitialDirectory = Environment.CurrentDirectory,
-                    RestoreDirectory = true
-                };
-
-                if (dialog.ShowDialog() != true) return;
-                fileName = dialog.FileName;
-            }
-
-            using var writer = new StreamWriter(new FileStream(fileName, FileMode.Create, FileAccess.Write));
-            await writer.WriteAsync(f_text).ConfigureAwait(false);
-        }
+        
     }
 }
